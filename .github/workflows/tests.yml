@@ -17,7 +17,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
 
-      - name: Cache composes dependencies
+      - name: Cache composer dependencies
         uses: actions/cache@v2
         with:
           path: vendor
