@@ -32,3 +32,6 @@ jobs:
         -   name: Install Composer Dependencies
             run: |
                 composer install --no-dev --no-interaction --prefer-dist
+
+        -   name: Create Artifact
+            run: tar -czf plusminus-app.tar.gz --exclude=*.git --exclude=node_modules *
