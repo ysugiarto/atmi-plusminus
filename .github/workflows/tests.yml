@@ -40,7 +40,7 @@ jobs:
 
       - name: Run test suite
         run: |
-          php artisan test
+          php artisan test --coverage
 
     services:
       mysql:
