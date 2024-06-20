@@ -23,7 +23,7 @@ class UserTest extends TestCase
         
         $this->assertTrue($user->name == 'testuser');
         $this->assertTrue($user->email == 'testuser@email.com');
-        $this->assertTrue(Hash::check('usepassword', $user->password));
+        $this->assertTrue(Hash::check('userpassword', $user->password));
     }
 }
 
