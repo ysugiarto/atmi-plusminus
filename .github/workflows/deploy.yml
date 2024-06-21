@@ -66,3 +66,13 @@ jobs:
         -   uses: actions/download-artifact@v3
             with:
                 name: app-build
+
+        -   name: Upload Release
+            uses: appleboy/scp-action@master
+            with:
+                host: ${{ matrix.server.ip }}
+                username: ${{ secrets.USER_APP_YSUGIARTO }}
+                key: ${{ secrets.SSH_KEY_APP_YSUGIARTO }}
+                port: ${{ matrix.server.port }}
+                source: ${{ github.sha }}.tar.gz
+                target: ${{ matrix.server.path }}/${{ matrix.server.name }}/artifacts
