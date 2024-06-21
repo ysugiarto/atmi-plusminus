@@ -15,6 +15,8 @@ jobs:
   create-deployment-artifacts:
     name: Create Deployment Artifacts
     runs-on: ubuntu-latest
+    outputs:
+        deployment-matrix: ${{ steps.export-deployment-matrix.outputs.deployment-matrix }}
     steps:
         -   uses: actions/checkout@v3
 
@@ -43,3 +45,24 @@ jobs:
             with:
                 name: app-build
                 path: ${{ github.sha }}.tar.gz
+
+        -   name: Export Deployment Matrix
+            id: export-deployment-matrix
+            run: |
+                JSON="$(cat ./deployment-config.json)"
+                JSON="$(JSON//'%'/'%25')"
+                JSON="$(JSON//$'\n'/'%0A')"
+                JSON="$(JSON//$'\r'/'%0D')"
+                echo "::set-output name=deployment-matrix::$JSON"
+                
+  prepare-release-on-server:
+    name: "${{ matrix.server.name }}: Prepare Release"
+    runs-on: ubuntu-latest
+    needs: create-deployment-artifacts
+    strategy:
+        matrix:
+          server: ${{ fromJson(needs.create-deployment-artifacts.outputs.deployment-matrix) }}
+    steps:
+        -   uses: actions/download-artifact@v3
+            with:
+                name: app-build
