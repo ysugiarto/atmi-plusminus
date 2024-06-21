@@ -3,7 +3,7 @@
         "name": "ATMI-Plusminus",
         "ip": "86.48.6.51",
         "port": "22",
-        "beforeHooks": "composer install --no-dev --no-interaction --prefer-dist && php artisan migrate --force",
+        "beforeHooks": "cd /home/devgie/public_html/ATMI-Plusminus && php artisan migrate --force",
         "afterHooks": "",
         "path": "/home/devgie/app-development/laravel",
         "html-path": "/home/devgie/public_html"
