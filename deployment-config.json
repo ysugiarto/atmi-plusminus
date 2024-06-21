@@ -5,7 +5,8 @@
         "port": "22",
         "beforeHooks": "",
         "afterHooks": "",
-        "path": "/home/devgie/app-development/laravel"
+        "path": "/home/devgie/app-development/laravel",
+        "html-path": "/home/devgie/public_html"
     }
 ]
     
