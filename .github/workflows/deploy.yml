@@ -92,6 +92,7 @@ jobs:
 
                     mkdir -p ${{ matrix.server.path }}/${{ matrix.server.name }}/storage/{app,public,framework,logs}
                     mkdir -p ${{ matrix.server.path }}/${{ matrix.server.name }}/storage/framework/{cache,sessions,testing,views}
+                    mkdir -p ${{ matrix.server.path }}/${{ matrix.server.name }}/storage/framework/cache/data
                     chmod -R 0777 ${{ matrix.server.path }}/${{ matrix.server.name }}/storage
 
   run-before-hooks:

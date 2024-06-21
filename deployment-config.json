@@ -3,7 +3,7 @@
         "name": "ATMI-Plusminus",
         "ip": "86.48.6.51",
         "port": "22",
-        "beforeHooks": "chmod -R 0777 ${RELEASE_PATH}/storage",
+        "beforeHooks": "",
         "afterHooks": "",
         "path": "/home/devgie/app-development/laravel",
         "html-path": "/home/devgie/public_html"
