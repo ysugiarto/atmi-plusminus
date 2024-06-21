@@ -16,13 +16,13 @@ jobs:
     name: Create Deployment Artifacts
     runs-on: ubuntu-latest
     outputs:
-        deployment-matrix: ${{ steps.export-deployment-matrix.outputs.deployment-matrix }}
+        DEPLOYMENT_MATRIX: ${{ steps.export-deployment-matrix.outputs.DEPLOYMENT_MATRIX }}
     steps:
         -   uses: actions/checkout@v3
 
         -   name: Compile CSS and Javascript
             run: |
-                npm install
+                npm ci
                 npm run build
 
         -   name: Install PHP 8.3
@@ -35,13 +35,13 @@ jobs:
             run: |
                 composer install --no-dev --no-interaction --prefer-dist
 
-        -   name: Create Artifact
+        -   name: Create Deployment Artifact
             env:
                 GITHUB_SHA: ${{ github.sha }}
-            run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules *
+            run: tar -czf "${GITHUB_SHA}".tar.gz --exclude=*.git --exclude=node_modules --exclude=tests *
 
         -   name: Store Artifact for Distribution
-            uses: actions/upload-artifact@v2
+            uses: actions/upload-artifact@v3
             with:
                 name: app-build
                 path: ${{ github.sha }}.tar.gz
@@ -49,11 +49,11 @@ jobs:
         -   name: Export Deployment Matrix
             id: export-deployment-matrix
             run: |
+                delimiter="$(openssl rand -hex 8)"
                 JSON="$(cat ./deployment-config.json)"
-                JSON="$(JSON//'%'/'%25')"
-                JSON="$(JSON//$'\n'/'%0A')"
-                JSON="$(JSON//$'\r'/'%0D')"
-                echo "::set-output name=deployment-matrix::$JSON"
+                echo "DEPLOYMENT_MATRIX<<${delimiter}" >> "${GITHUB_OUTPUT}"
+                echo "$JSON" >> "${GITHUB_OUTPUT}"
+                echo "${delimiter}" >> "${GITHUB_OUTPUT}"
                 
   prepare-release-on-server:
     name: "${{ matrix.server.name }}: Prepare Release"
@@ -61,7 +61,7 @@ jobs:
     needs: create-deployment-artifacts
     strategy:
         matrix:
-          server: ${{ fromJson(needs.create-deployment-artifacts.outputs.deployment-matrix) }}
+          server: ${{ fromJson(needs.create-deployment-artifacts.outputs.DEPLOYMENT_MATRIX) }}
     steps:
         -   uses: actions/download-artifact@v3
             with:
