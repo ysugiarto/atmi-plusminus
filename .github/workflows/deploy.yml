@@ -22,7 +22,7 @@ jobs:
 
         -   name: Compile CSS and Javascript
             run: |
-                npm ci
+                npm install
                 npm run build
 
         -   name: Install PHP 8.3
