@@ -34,3 +34,4 @@ The development utilizes GitHub Actions to reduce downtime. Both continuous inte
 - Run `composer install` to install all dependencies.
 - Run `php artisan migrate:refresh`.
 - Run `php artisan server` or use Herd or Valet to host the application.
+
