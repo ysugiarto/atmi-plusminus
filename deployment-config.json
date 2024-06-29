@@ -3,7 +3,7 @@
         "name": "ATMI-Plusminus",
         "ip": "86.48.6.51",
         "port": "22",
-        "beforeHooks": "cd /home/devgie/public_html/ATMI-Plusminus && php artisan migrate:fresh --seed",
+        "beforeHooks": "cd /home/devgie/public_html/ATMI-Plusminus && php artisan optimize:clear && php artisan event:cache && php artisan view:cache && php artisan optimize && npm run build   && php artisan migrate:fresh --seed",
         "afterHooks": "",
         "path": "/home/devgie/app-development/laravel",
         "html-path": "/home/devgie/public_html"
