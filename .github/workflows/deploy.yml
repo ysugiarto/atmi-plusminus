@@ -32,7 +32,7 @@ jobs:
 
         -   name: Install Composer Dependencies
             run: |
-                composer install --no-dev --no-interaction --prefer-dist
+                composer install --no-interaction --prefer-dist
 
         -   name: Create Deployment Artifact
             env:
