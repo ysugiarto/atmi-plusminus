@@ -4,7 +4,7 @@
         "ip": "86.48.6.51",
         "port": "22",
         "beforeHooks": "",
-        "afterHooks": "cd /home/devgie/public_html/ATMI-Plusminus && php artisan clear-compiled && php artisan config:clear && php artisan optimize && php artisan migrate:fresh --seed",
+        "afterHooks": "cd /home/devgie/public_html/ATMI-Plusminus && php artisan clear-compiled && php artisan config:clear && php artisan route:clear && php artisan optimize && php artisan migrate:fresh --seed",
         "path": "/home/devgie/app-development/laravel",
         "html-path": "/home/devgie/public_html"
     }
