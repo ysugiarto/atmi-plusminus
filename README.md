@@ -30,8 +30,9 @@ The development utilizes GitHub Actions to reduce downtime. Both continuous inte
 - Get your PHP ready!
 - Get your database ready!
 - Clone `develop-branch` in to your local repository.
-- Provide `.env` file in the root directory. If key is needed, generate using `php artisan key:generate`.
+- Navigate into app directory.
 - Run `composer install` to install all dependencies.
-- Run `php artisan migrate:refresh`.
-- Run `php artisan server` or use Herd or Valet to host the application.
+- Provide `.env` file in the root directory. If key is needed, generate using `php artisan key:generate`.
+- Run `php artisan migrate:refresh --seed`.
+- Run `php artisan serve` or use Herd or Valet to host the application.
 
