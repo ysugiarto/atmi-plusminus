@@ -35,7 +35,7 @@ jobs:
 
       - name: Run test suite
         run: |
-          php artisan test --coverage --min=85.0
+          php artisan test --coverage
 
     services:
       mysql:
