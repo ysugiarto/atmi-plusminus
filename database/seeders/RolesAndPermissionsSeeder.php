@@ -8,6 +8,7 @@ use Spatie\Permission\Models\Permission;
 use Spatie\Permission\Models\Role;
 use Spatie\Permission\PermissionRegistrar;
 use Illuminate\Support\Facades\Hash;
+use App\Models\User;
 
 class RolesAndPermissionsSeeder extends Seeder
 {
@@ -28,7 +29,7 @@ class RolesAndPermissionsSeeder extends Seeder
         Permission::create(['name' => 'delete permission']);
 
         // create roles and assign existing permissions
-        $role1 = Role::create(['name' => 'Just Admin']);
+        $role1 = Role::create(['name' => 'Admin']);
         $role1->givePermissionTo('edit user');
         $role1->givePermissionTo('delete user');
         $role1->givePermissionTo('edit role');
@@ -44,31 +45,37 @@ class RolesAndPermissionsSeeder extends Seeder
 
         $role4 = Role::create(['name' => 'Student']);
 
+        $role5 = Role::create(['name' => 'User']);
+
         // create demo users
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Just Admin',
-            'email' => 'admin@app.com',
+        $user = User::create([
+            'firstname' => 'Just',
+            'lastname' => 'Admin',
+            'email' => 'admin@atmi.ac.id',
             'password' => Hash::make('admin'),
         ]);
         $user->assignRole($role1);
 
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Just Instructor',
-            'email' => 'ins@app.com',
+        $user = User::create([
+            'firstname' => 'Just',
+            'lastname' => 'Instructor',
+            'email' => 'ins@atmi.ac.id',
             'password' => Hash::make('ins'),
         ]);
         $user->assignRole($role2);
 
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Super Admin',
-            'email' => 'sadmin@app.com',
+        $user = User::create([
+            'firstname' => 'Super',
+            'lastname' => 'Admin',
+            'email' => 'sadmin@atmi.ac.id',
             'password' => Hash::make('super'),
         ]);
         $user->assignRole($role3);
 
-        $user = \App\Models\User::factory()->create([
-            'name' => 'Just Student',
-            'email' => 'student@app.com',
+        $user = User::create([
+            'firstname' => 'Just',
+            'lastname' => 'Student',
+            'email' => 'student@student.atmi.ac.id',
             'password' => Hash::make('student'),
         ]);
         $user->assignRole($role4);
