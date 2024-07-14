@@ -128,18 +128,24 @@
         <!-- User Menu -->
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
-                <img src="{{ asset('assets/img/user2-160x160.jpg') }}" class="user-image img-circle elevation-2"
-                    alt="User Image">
-                <span class="d-none d-md-inline">{{ Auth::user()->name }}</span>
+                @if (Auth::user()->avatar)
+                    <img src="{{ url(Auth::user()->avatar) }}" class="user-image img-circle elevation-2" alt="User Image">
+                @else
+                    <img src="{{ asset('storage/sys/img/male.png') }}" class="user-image img-circle elevation-2" alt="User Image">
+                @endif
+                <span class="d-none d-md-inline">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
             </a>
             <ul class="dropdown-menu dropdown-menu-lg dropdown-menu-right">
                 <!-- User image -->
                 <li class="user-header bg-primary">
-                    <img src="{{ asset('assets/img/user2-160x160.jpg') }}" class="img-circle elevation-2"
-                        alt="User Image">
+                    @if (Auth::user()->avatar)
+                        <img src="{{ url(Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
+                    @else
+                        <img src="{{ asset('storage/sys/img/male.png') }}" class="img-circle elevation-2" alt="User Image">
+                    @endif
 
                     <p>
-                        {{ Auth::user()->name }} - {{ Auth::user()->roles->first()->name }}
+                        {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} - {{ Auth::user()->roles->first()->name }}
                         <small>Member since Nov. 2012</small>
                     </p>
                 </li>
