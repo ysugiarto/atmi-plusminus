@@ -16,12 +16,14 @@ class UserTest extends TestCase
     public function can_create_a_user(): void
     {
         $user = User::factory()->make([
-            'name' => 'testuser',
+            'firstname' => 'test',
+            'lastname' => 'user',
             'email' => 'testuser@email.com',
             'password' => Hash::make('userpassword')
         ]);
-        
-        $this->assertTrue($user->name == 'testuser');
+
+        $this->assertTrue($user->firstname == 'test');
+        $this->assertTrue($user->lastname == 'user');
         $this->assertTrue($user->email == 'testuser@email.com');
         $this->assertTrue(Hash::check('userpassword', $user->password));
     }
