@@ -34,5 +34,6 @@ The development utilizes GitHub Actions to reduce downtime. Both continuous inte
 - Run `composer install` to install all dependencies.
 - Provide `.env` file in the root directory. If key is needed, generate using `php artisan key:generate`.
 - Run `php artisan migrate:refresh --seed`.
+- Run `php artisan storage:link` and copy the shared assets in the 'storage' directory.
 - Run `php artisan serve` or use Herd or Valet to host the application.
 
