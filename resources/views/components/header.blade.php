@@ -4,12 +4,6 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="pushmenu" href="#" role="button"><i class="fas fa-bars"></i></a>
         </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="../../index3.html" class="nav-link">Home</a>
-        </li>
-        <li class="nav-item d-none d-sm-inline-block">
-            <a href="#" class="nav-link">Contact</a>
-        </li>
     </ul>
 
     <!-- Right navbar links -->
@@ -129,9 +123,17 @@
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 @if (Auth::user()->avatar)
-                    <img src="{{ url(Auth::user()->avatar) }}" class="user-image img-circle elevation-2" alt="User Image">
+                    <img src="{{ url(Auth::user()->avatar) }}" class="user-image img-circle elevation-2"
+                        alt="User Image">
                 @else
-                    <img src="{{ asset('storage/sys/img/male.png') }}" class="user-image img-circle elevation-2" alt="User Image">
+                    @if (Auth::user()->person->jenis_kelamin == 'Laki-laki')
+                        <img src="{{ asset('storage/sys/img/male.png') }}" class="user-image img-circle elevation-2"
+                            alt="User Image">
+                    @else
+                        <img src="{{ asset('storage/sys/img/female.png') }}" class="user-image img-circle elevation-2"
+                            alt="User Image">
+                    @endif
+
                 @endif
                 <span class="d-none d-md-inline">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
             </a>
@@ -141,11 +143,18 @@
                     @if (Auth::user()->avatar)
                         <img src="{{ url(Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
                     @else
-                        <img src="{{ asset('storage/sys/img/male.png') }}" class="img-circle elevation-2" alt="User Image">
+                        @if (Auth::user()->person->jenis_kelamin == 'Laki-laki')
+                            <img src="{{ asset('storage/sys/img/male.png') }}" class="img-circle elevation-2"
+                                alt="User Image">
+                        @else
+                            <img src="{{ asset('storage/sys/img/female.png') }}" class="img-circle elevation-2"
+                                alt="User Image">
+                        @endif
                     @endif
 
                     <p>
-                        {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} - {{ Auth::user()->roles->first()->name }}
+                        {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} -
+                        {{ Auth::user()->roles->first()->name }}
                         <small>Member since Nov. 2012</small>
                     </p>
                 </li>
@@ -157,7 +166,7 @@
                         @csrf
 
                         <!-- Need to be put inside the form to maintain layout -->
-                        <a href="#" class="btn btn-default btn-flat">{{ __('Profile') }}</a>
+                        <a href="{{ url('userprofile') }}" class="btn btn-default btn-flat">{{ __('Profile') }}</a>
 
                         <button type="submit" class="btn btn-default btn-flat float-right">
                             {{ __('Logout') }}
@@ -170,11 +179,6 @@
         <li class="nav-item">
             <a class="nav-link" data-widget="fullscreen" href="#" role="button">
                 <i class="fas fa-expand-arrows-alt"></i>
-            </a>
-        </li>
-        <li class="nav-item">
-            <a class="nav-link" data-widget="control-sidebar" data-slide="true" href="#" role="button">
-                <i class="fas fa-th-large"></i>
             </a>
         </li>
     </ul>

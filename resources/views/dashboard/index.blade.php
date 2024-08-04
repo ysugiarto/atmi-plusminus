@@ -36,6 +36,7 @@
             </div>
             <div class="card-body">
                 Start creating your amazing application!
+                <img src="https://lh3.googleusercontent.com/a/ACg8ocKrBMDIScijfC94MR4v9-RNmjmt_P3l2yBlny8GehPQfiGh5RB5=s96-c">
             </div>
             <!-- /.card-body -->
             <div class="card-footer">

@@ -1,28 +1,42 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleSocialiteController;
+use App\Http\Controllers\PrivateFileController;
 use Illuminate\Support\Facades\Route;
 
+// Startpage
 Route::get('/', function () {
     return view('welcome');
 });
-
-Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
 
 // Google Authentication
 Route::get('auth/google', [GoogleSocialiteController::class, 'redirectToGoogle'])->name('auth.google');
 Route::get('auth/google/callback', [GoogleSocialiteController::class, 'handleGoogleCallback'])->name('auth.google.callback');
 
+// Dashboard
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
+});
+
+
+// General
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('system-file/{subfolder}/img/{filename}', [PrivateFileController::class, 'getImageFile'])->middleware('auth')->name('system-file.get-image');
+});
+
+
+
+// Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');
+
 // Route::get('/dashboard', function () {
 //     return view('dashboard');
 // })->middleware(['auth', 'verified'])->name('dashboard');
 
-Route::middleware('auth')->group(function () {
-    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
-    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
-    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
-});
+// Route::middleware('auth')->group(function () {
+//     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+//     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+//     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+// });
 
 require __DIR__.'/auth.php';
