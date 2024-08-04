@@ -133,7 +133,6 @@
                         <img src="{{ asset('storage/sys/img/female.png') }}" class="user-image img-circle elevation-2"
                             alt="User Image">
                     @endif
-
                 @endif
                 <span class="d-none d-md-inline">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
             </a>
