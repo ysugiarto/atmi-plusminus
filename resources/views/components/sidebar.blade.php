@@ -15,11 +15,18 @@
                 @if (Auth::user()->avatar)
                     <img src="{{ url(Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Avatar">
                 @else
-                    <img src="{{ asset('storage/sys/img/male.png') }}" class="img-circle elevation-2" alt="User Image">
+                    @if (Auth::user()->person->jenis_kelamin == 'Laki-laki')
+                        <img src="{{ asset('storage/sys/img/male.png') }}" class="img-circle elevation-2"
+                            alt="User Image">
+                    @else
+                        <img src="{{ asset('storage/sys/img/female.png') }}" class="img-circle elevation-2"
+                            alt="User Image">
+                    @endif
                 @endif
             </div>
             <div class="info">
-                <a href="{{ url('userprofile') }}" class="d-block">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</a>
+                <a href="{{ url('userprofile') }}" class="d-block">{{ Auth::user()->firstname }}
+                    {{ Auth::user()->lastname }}</a>
             </div>
         </div>
 

@@ -1,8 +1,8 @@
 <?php
 
-use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\GoogleSocialiteController;
+use App\Http\Controllers\PrivateFileController;
 use Illuminate\Support\Facades\Route;
 
 // Startpage
@@ -18,6 +18,13 @@ Route::get('auth/google/callback', [GoogleSocialiteController::class, 'handleGoo
 Route::group(['middleware' => ['auth', 'verified']], function () {
     Route::get('/dashboard', [DashboardController::class, 'index'])->name('dashboard');
 });
+
+
+// General
+Route::group(['middleware' => ['auth', 'verified']], function () {
+    Route::get('system-file/{subfolder}/img/{filename}', [PrivateFileController::class, 'getImageFile'])->middleware('auth')->name('system-file.get-image');
+});
+
 
 
 // Route::get('/dashboard', [DashboardController::class, 'index'])->middleware(['auth', 'verified'])->name('dashboard');

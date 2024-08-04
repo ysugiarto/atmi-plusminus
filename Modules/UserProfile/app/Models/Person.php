@@ -40,4 +40,9 @@ class Person extends Model
     {
         return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
+    public function imgPath()
+    {
+        return route('system-file.get-image', ['subfolder' =>  $this->no_ktp, 'filename' => $this->foto]);
+    }
 }

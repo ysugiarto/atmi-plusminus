@@ -123,9 +123,17 @@
         <li class="nav-item dropdown user-menu">
             <a href="#" class="nav-link dropdown-toggle" data-toggle="dropdown">
                 @if (Auth::user()->avatar)
-                    <img src="{{ url(Auth::user()->avatar) }}" class="user-image img-circle elevation-2" alt="User Image">
+                    <img src="{{ url(Auth::user()->avatar) }}" class="user-image img-circle elevation-2"
+                        alt="User Image">
                 @else
-                    <img src="{{ asset('storage/sys/img/male.png') }}" class="user-image img-circle elevation-2" alt="User Image">
+                    @if (Auth::user()->person->jenis_kelamin == 'Laki-laki')
+                        <img src="{{ asset('storage/sys/img/male.png') }}" class="user-image img-circle elevation-2"
+                            alt="User Image">
+                    @else
+                        <img src="{{ asset('storage/sys/img/female.png') }}" class="user-image img-circle elevation-2"
+                            alt="User Image">
+                    @endif
+
                 @endif
                 <span class="d-none d-md-inline">{{ Auth::user()->firstname }} {{ Auth::user()->lastname }}</span>
             </a>
@@ -135,11 +143,18 @@
                     @if (Auth::user()->avatar)
                         <img src="{{ url(Auth::user()->avatar) }}" class="img-circle elevation-2" alt="User Image">
                     @else
-                        <img src="{{ asset('storage/sys/img/male.png') }}" class="img-circle elevation-2" alt="User Image">
+                        @if (Auth::user()->person->jenis_kelamin == 'Laki-laki')
+                            <img src="{{ asset('storage/sys/img/male.png') }}" class="img-circle elevation-2"
+                                alt="User Image">
+                        @else
+                            <img src="{{ asset('storage/sys/img/female.png') }}" class="img-circle elevation-2"
+                                alt="User Image">
+                        @endif
                     @endif
 
                     <p>
-                        {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} - {{ Auth::user()->roles->first()->name }}
+                        {{ Auth::user()->firstname }} {{ Auth::user()->lastname }} -
+                        {{ Auth::user()->roles->first()->name }}
                         <small>Member since Nov. 2012</small>
                     </p>
                 </li>

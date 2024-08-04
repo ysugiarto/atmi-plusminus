@@ -16,10 +16,9 @@ class UserProfileController extends Controller
      */
     public function index()
     {
-        // $currentPerson = Person::where('user_id', Auth::user()->id)->first();
+        $person = Auth::user()->person;
 
-        // return view('userprofile::index', compact('currentPerson'));
-        return view('userprofile::index');
+        return view('userprofile::index', compact('person'));
     }
 
     /**

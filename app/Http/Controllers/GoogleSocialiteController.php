@@ -51,7 +51,13 @@ class GoogleSocialiteController extends Controller
             }
             else
             {
-                $newUser->assignRole('User');
+                if(explode("@", $user->email)[1] == 'student.atmi.ac.id') {
+                    $newUser->assignRole('Student');
+                }
+                else {
+                    $newUser->assignRole('Normal User');
+                }
+
             }
 
             Auth::login($newUser);
